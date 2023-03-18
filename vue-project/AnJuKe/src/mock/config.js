@@ -1,8 +1,11 @@
 import Mock from 'mockjs'
 import swiperList from './data/swiperList'
-import houseList from './data/houseList'
-import detail from './data/detail'
+import detailList from './data/detailList'
+import detailSwiper from './data/detailSwiper'
 import categoryList from './data/categoryList'
+import hotHouses from './data/hotHouses'
+import newHouses from './data/newHouses'
+import rentalHouses from './data/rentalHouses'
 
 // 假接口要满足什么？ 数据 url
 Mock.setup({
@@ -24,19 +27,40 @@ Mock.mock(/\/categoryList/, 'get', () => {
    }
 })
 
-Mock.mock(/\/houseList/, 'get', () => {
+Mock.mock(/\/hotHouses/, 'get', () => {
    return {
       code: 0,
-      result: houseList
+      result: hotHouses
+   }
+})
+
+Mock.mock(/\/newHouses/, 'get', () => {
+   return {
+      code: 0,
+      result: newHouses
+   }
+})
+
+Mock.mock(/\/rentalHouses/, 'get', () => {
+   return {
+      code: 0,
+      result: rentalHouses
+   }
+})
+
+Mock.mock(/\/detailSwiper/, 'get', () => {
+   return {
+      code: 0,
+      result: detailSwiper
    }
 })
 
 // 假冒的服务器
-Mock.mock(/\/detail/, 'get', () => {
+Mock.mock(/\/detailList/, 'get', () => {
    return {
       code: 0, // 没有错误发生
       // code: 1,
       // msg: '服务器出错了',
-      result: detail
+      result: detailList
    }
 })

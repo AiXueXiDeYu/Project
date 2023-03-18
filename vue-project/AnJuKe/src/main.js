@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@/mock/config' // 模拟数据
 import { createPinia } from 'pinia'
 import { 
     Field,
@@ -11,12 +10,20 @@ import {
     ConfigProvider,
     Tabbar,
     TabbarItem,
-    Skeleton
+    Skeleton,
+    Icon,
+    CellGroup,
+    Form,
+    Button,
+    ShareSheet,
+    Cell
 } from 'vant'
+import router from './router' // 启用路由
+import '@/mock/config' // 模拟数据
 import 'vant/lib/index.css'
 import './assets/main.css'  // reset 
 import 'lib-flexible/flexible'  // 移动端适配就做好了
-import router from './router' // 启用路由
+
 
 
 const app = createApp(App)
@@ -28,8 +35,14 @@ app
     .use(Popup)
     .use(ConfigProvider)
     .use(Tabbar)
+    .use(Icon)
+    .use(Cell)
     .use(TabbarItem)
+    .use(CellGroup)
+    .use(Form)
+    .use(Button)
     .use(Skeleton)
+    .use(ShareSheet)
     .use(router)
     .use(createPinia())
     .mount('#app')

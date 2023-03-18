@@ -3,58 +3,19 @@
         <MyHeader />
         <HomeSwiper :swiperList="swiperList" />
         <CategoryList :categoryList="categoryList" />
-        <section class="house">
-            <header class="house-header">新房上线</header>
-            <van-skeleton title :row="3" :loading="loading">
-                <!-- slot 插槽 -->
-                <div class="house-box">
-                    <house-item
-                        v-for="item in houseList.newHouses" 
-                        :key="item.id"
-                        @click="gotoDetail(item.houseId)"
-                        :house="item"/>
-                </div>
-            </van-skeleton>
-        </section>
-        <section class="house">
-            <header class="house-header">推荐房</header>
-            <van-skeleton title :row="3" :loading="loading">
-                <!-- slot 插槽 -->
-                <div class="house-box">
-                    <house-item
-                        v-for="item in houseList.rentalHouses" 
-                        :key="item.id"
-                        @click="gotoDetail(item.houseId)"
-                        :house="item"/>
-                </div>
-            </van-skeleton>
-        </section>
-        <section class="house">
-            <header class="house-header">热销房屋</header>
-            <van-skeleton title :row="3" :loading="loading">
-                <!-- slot 插槽 -->
-                <div class="house-box">
-                    <house-item
-                        v-for="item in houseList.hotHouses" 
-                        :key="item.id"
-                        :house="item"
-                        @click="gotoDetail(item.houseId)"
-                        />
-                </div>
-            </van-skeleton>
-        </section>
+        <HousesList />
    </div> 
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed } from 'vue'
 import { showLoadingToast, closeToast } from 'vant'
 // import { useRouter } from 'vue-router';
 import { useHomeStore } from '@/store/home.js'
 import HomeSwiper from '~/HomeSwiper.vue'
 import CategoryList from '~/CategoryList.vue'
 import MyHeader from '~/MyHeader.vue'
-import HouseItem from '~/HouseItem.vue'
+import HousesList from '~/HousesList.vue'
 
 
 // const router = useRouter()
@@ -62,8 +23,8 @@ import HouseItem from '~/HouseItem.vue'
 const homeStore = useHomeStore()
 const swiperList = computed(() => homeStore.swiperList) 
 const categoryList = computed(() => homeStore.categoryList)
-const houseList = computed(() => homeStore.houseList)
-const loading = ref(homeStore.loading)
+// const loading = computed(() => (homeStore.loading))
+
 
 onMounted(async () => {
     showLoadingToast({
@@ -71,14 +32,12 @@ onMounted(async () => {
         forbidClick: true
     })
    await homeStore.getSwiperList()
-   await homeStore.getHouseList()
    await homeStore.getCategoryList()
-    console.log(homeStore.loading);
+    // console.log(homeStore.loading);
    homeStore.loading = false
    closeToast()
-   console.log(homeStore.loading);
+//    console.log(homeStore.loading);
 })
-
 </script>
 
 <style lang="stylus" scoped>
@@ -101,16 +60,4 @@ onMounted(async () => {
         img
             wh(.96rem, .96rem)
             margin .346667rem auto .213333rem auto
-.house
-    .house-header
-        background #f9f9f9
-        height 1.3333rem
-        line-height 1.3333rem
-        text-align center
-        color $primary
-        font-size .426667rem
-        font-weight 500
-    .house-box
-        fj(flex-start)
-        flex-wrap wrap
 </style>  

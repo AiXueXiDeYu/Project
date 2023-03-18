@@ -1,6 +1,17 @@
 <template>
   <div>
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+    <transition :name="state.transitionName">
+      <keep-alive> 
+        <component :is='Component' :key="$route.name" v-if="$route.meta.keepAlive" />
+      </keep-alive>
+    </transition>
+  </router-view>
+  <router-view v-slot="{ Component }">
+    <transition :name="state.transitionName">
+      <component :is='Component' :key="$route.name" v-if="!$route.meta.keepAlive" />
+    </transition>
+  </router-view>
     <van-tabbar route>
       <van-tabbar-item :to="(item.name)" v-for="(item, index) in tabbars" :key="'tabbar' + index">
         <span>{{ item.title }}</span>
@@ -14,9 +25,9 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 
-const active = ref(0);
+// const active = ref(0);
 const tabbars = [{
   name: '/home',
   title:'首页',
@@ -45,8 +56,13 @@ const tabbars = [{
 
 const router = useRouter()
 
-router.beforeEach((to, from) => {
-  // console.log(from, to, '//// /');
+router.beforeEach((to, from, next) => {
+  // if (to.meta.pass) { // 需要登录权限才能访问
+  // 
+  //     next('/login')
+  // } else {
+  next()
+  // }
   if (to.meta.index > from.meta.index) {
     // 从主页面 去到子页面
     state.transitionName = 'slide-left'
@@ -60,6 +76,9 @@ router.beforeEach((to, from) => {
 })
 const state = reactive({
   transitionName: 'slide-left'
+})
+onMounted(() => {
+
 })
 </script>
 

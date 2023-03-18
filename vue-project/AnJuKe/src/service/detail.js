@@ -1,6 +1,14 @@
+import axios from './config.js'  // axios 标准
 
-import axios from './config.js'
-
-export const getDetail = () => {
-   return axios.get('/detail')
+export function getDetail(id) {
+    return axios.get(`detail/${id}`) // promise
 }
+
+export const getDetailList = () => {
+    return axios.get('/detailList')
+}
+
+export const getDetailSwiper = () => {
+    return axios.get('/detailSwiper')
+}
+

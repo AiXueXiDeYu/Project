@@ -43,18 +43,15 @@ const router = createRouter({
       {
          path: '/login',
          name: 'login',
-         meta:{
-             index: 1
-         },
          component: () => import('@/views/Login.vue')
       },
       {
-         path: '/detail',
+         path: '/detail/:id',
          name: 'detail',
          meta:{
              index: 3
          },
-         component: () => import('@/views/User.vue')
+         component: () => import('@/views/Detail.vue')
       },
    ]
 

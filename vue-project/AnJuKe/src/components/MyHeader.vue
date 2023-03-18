@@ -10,7 +10,7 @@
         <div class="header-address">
             <van-config-provider :theme-vars="themeVars">
                 <van-field v-model="fieldValue" readonly is-link arrow-direction="down" @click="showPicker = true" />
-                <van-popup v-model:show="showPicker" round position="bottom"  :style="{ height: '30%' }">
+                <van-popup v-model:show="showPicker" round position="bottom"  >
                     <van-picker :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
                 </van-popup>
             </van-config-provider>
@@ -31,10 +31,10 @@ const onConfirm = ({ selectedOptions }) => {
 // 自定义主题样式
 const themeVars = reactive({
   cellLineHeight: "20px",
-  cellVerticalPadding: "0",
+  cellVerticalPadding: "17px",
   cellHorizontalPadding: '0',
   cellTextColor: "rgb(17, 17, 17)",
-  cellFontSize: "15px",
+  cellFontSize: "16px",
   cellRightIconColor: "rgb(17, 17, 17)",
   StickyTop: "5px"
 })
@@ -120,12 +120,12 @@ const columns = [
     font-size 0.4rem
     color #fff
     z-index 10000
+    background-color #fff
+    opacity 0.95
     wh(100%, 1.33333rem)
     fj()
     .nbmenu2
         color $primary
-    &.active
-        background $primary
         .nbmenu2
             color #fff
         .login

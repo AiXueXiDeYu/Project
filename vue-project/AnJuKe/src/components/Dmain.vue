@@ -1,24 +1,43 @@
 <template>
-  <div class="product-info">
-    <div class="product-title">
-      {{ detailList.houseName }}
-    </div>
-    <div class="product-price">
-      <span>￥{{ detailList.housePrice }}</span>
-      <span>{{  detailList.houseSize }}</span>
-      <span>{{  detailList.houseAll }}</span>
-      <span>{{  detailList.houseAddress }}</span>
-    </div>
-  </div>
-  <div class="product-intro">
-    <ul>
-      <li>概述</li>
-      <li>参数</li>
-      <li>安装服务</li>
-      <li>常见问题</li>
-    </ul>
-    <div class="product-content" v-html="detailList.houseDetailContent"></div>
-  </div>
+	<div class="body" v-for="item in detailList" :key="id">
+		<div class="product-info">
+			<div class="name">
+				{{ item.huoseName }}
+				<div class="status">
+					<div class="p">
+						{{ item.p1 }}
+					</div>
+					<div class="p">
+						{{ item.p2 }}
+					</div>
+					<div class="p">
+						{{ item.p3 }}
+					</div>
+					<div class="p">
+						{{ item.p4 }}
+					</div>
+				</div>
+			</div>
+			<div class="houseprice">
+				<div class="price">
+					{{ item.housePrice }}
+				</div>
+				<div class="size">
+					{{ item.houseSize }}
+				</div>
+				<div class="all">
+					{{ item.houseAll }}
+				</div>
+			</div>
+			<div class="address">
+				地址：{{ item.houseAddress }}
+			</div>
+		</div>
+		<div class="product-intro">
+			<text>更多信息</text>
+			<div class="product-content" v-html="item.houseDetailContent"></div>
+		</div>
+	</div>
 </template>
   
 <script setup>
@@ -30,45 +49,67 @@ const detailStore = useDetailStore()
 const detailList = computed(() => detailStore.detailList)
 
 onMounted(async () => {
-  await detailStore.getDetailList()
+	await detailStore.getDetailList()
 })
 
 console.log(detailList);
 </script>
   
-<style lang="stylus" scoped>
-  @import '../common/style/mixin.styl';
-  .product-info
-    padding 0 .26667rem
-    .product-title
-      font-size 0.48rem
-      text-align-last left
-      color #333
-    .product-price
-        fj()
-        span:nth-child(1)
-          color #f63515
-          font-size .58667rem
-        span:nth-child(2)
-          color #999
-          font-size .426667rem
-  .product-intro
-    width 100%
-    padding-bottom 1.3333em
-    ul
-      fj()
-      width 100%
-      margin 0.2667rem 0
-      li
-        flex 1
-        padding 0.1333rem 0
-        text-align center
-        font-size .4rem
-        border-right 1px solid #999
-        &:last-child
-          border-right none
-    .product-content
-      padding 0 .266667rem
-      img
-        width 100%
+<style lang="css" scoped>
+.body {
+	margin: 10px;
+}
+.product-info {
+	display: flex;
+	flex-direction: column 
+}
+.name{
+	font-size: 20px;
+	font-weight: 700;
+}
+.status {
+	display: flex; 
+	justify-content: flex-start;
+	margin: 10px 0;
+}
+.houseprice {
+	display: flex; 
+	justify-content: space-between;
+	margin: 10px 0;
+}
+.price {
+	font-size: 16px;
+	font-weight: 800;
+	color: red;
+}
+.size {
+	font-size: 16px;
+	font-weight: 800;
+}
+.all {
+	font-size: 16px;
+	font-weight: 800;
+}
+.address {
+	font-size: 16px;
+	font-weight: 800;
+}
+.p {
+	background-color: #f6f6f6;
+	margin: .133333rem  .23333rem 0 0/* 5/37.5 */;
+	font-size:.266667rem /* 10/37.5 */;
+	color: #4c64c6;
+}
+.product-intro {
+	text-align: center;
+	margin: 20px 0;
+}
+.product-intro text{
+	font-size: 20px;
+	font-weight: 800;
+	margin: 10px;
+}
+.product-content img{
+	width: 100%;
+}
 </style>

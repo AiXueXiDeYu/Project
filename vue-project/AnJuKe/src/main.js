@@ -16,7 +16,9 @@ import {
     Form,
     Button,
     ShareSheet,
-    Cell
+    Cell,
+    Search,
+    ActionBarIcon
 } from 'vant'
 import router from './router' // 启用路由
 import '@/mock/config' // 模拟数据
@@ -42,7 +44,9 @@ app
     .use(Form)
     .use(Button)
     .use(Skeleton)
+    .use(Search)
     .use(ShareSheet)
+    .use(ActionBarIcon)
     .use(router)
     .use(createPinia())
     .mount('#app')

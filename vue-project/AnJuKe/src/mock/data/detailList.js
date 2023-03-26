@@ -2,6 +2,10 @@ export default [
    {
       houseId:'1',
       huoseName: '中海左岸国际',
+      p1: '在售',
+      p2: '住宅',
+      p3: '中海地产',
+      p4: '品牌开发商',
       housePrice: '19500元/㎡',
       houseSize: '103-141㎡',
       houseAll:'201万元/套起',

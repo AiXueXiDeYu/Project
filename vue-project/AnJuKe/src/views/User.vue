@@ -3,12 +3,15 @@
   <IsLogin />
   </div>
   <div v-else>
-   user
+  <Uheader></Uheader>
+  <Umain></Umain>
   </div>
 </template>
 
 <script setup>
 import { useLoginStore } from '@/store/login.js'
+import Uheader from '~/Uheader.vue'
+import Umain from '~/Umain.vue'
 import IsLogin from '~/IsLogin.vue';
 
 const loginStore = useLoginStore()

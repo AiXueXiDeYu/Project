@@ -3,7 +3,7 @@
         <div class="header-search">
             <span class="app-name">安居客</span>
             <i class="nbicon nbSearch"></i>
-            <router-link class="search-title" to="/product-list?from=home">
+            <router-link class="search-title" to="/search">
                 山河无恙，人间皆安
             </router-link>
         </div>
@@ -30,7 +30,7 @@ const onConfirm = ({ selectedOptions }) => {
 };
 // 自定义主题样式
 const themeVars = reactive({
-  cellLineHeight: "20px",
+  cellLineHeight: "18px",
   cellVerticalPadding: "17px",
   cellHorizontalPadding: '0',
   cellTextColor: "rgb(17, 17, 17)",

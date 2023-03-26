@@ -38,15 +38,15 @@
         </div>
     </div>
 </template>
-
+  
 <script setup>
-import { ref, reactive } from 'vue'
-import { useHomeStore } from '@/store/home.js'
+import { ref, reactive } from 'vue';
+import { useLoginStore } from '@/store/login.js';
 import { doLogin } from '@/service/login';
 import { setLocal, TOKEN } from '@/common/js/utils.js'
-import { showFailToast, showSuccessToast } from 'vant'
-
-const state = reactive ({
+import { showFailToast, showSuccessToast } from 'vant';
+import md5 from 'js-md5'; // 单向加密
+const state = reactive({
     show: true,
     username: '',
     password: '',
@@ -56,29 +56,31 @@ const state = reactive ({
 const login = ref(null); // 标记登录表单节点
 const register = ref(null); // 标记注册表单节点
 const toggle = () => state.show = !state.show; // 切换登录 注册
-const store = useHomeStore()
+const store = useLoginStore();
 const onSubmit = async (values) => {
-  if (register.value) { // 拿到注册页的values
-    const res = await doLogin(values, 'register') 
-    res ? showFailToast('用户已注册') : toggle(); // 是否重复注册
-  } else if (login.value) { // 拿到登录页的values
-    const data = await doLogin(values, 'login')
-    if (data.code != 0) { // 登录失败
-      showFailToast(data.msg) // 提示失败原因
-    } else { // 成功登录
-      if (data.token) { // 本地存储token
-        setLocal(TOKEN, data.token)
-      }
-      showSuccessToast(data.msg);
-      store.state.login.isLogin = true;
-      history.back(); // 成功登录并返回原页面
+    if (register.value) { // 拿到注册页的values
+        values.regpassword = md5(values.regpassword) // 密码不能明文传输
+        const res = await doLogin(values, 'register')
+        res ? showFailToast('用户已注册') : toggle(); // 是否重复注册
+    } else if (login.value) { // 拿到登录页的values
+        values.password = md5(values.password)
+        const data = await doLogin(values, 'login')
+        if (data.code != 0) { // 登录失败
+            showFailToast(data.msg) // 提示失败原因
+        } else { // 成功登录
+            if (data.token) { // 本地存储token
+                setLocal(TOKEN, data.token)
+            }
+            showSuccessToast(data.msg);
+            store.isLogin = true;
+            history.back(); // 成功登录并返回原页面
+        }
     }
-  }
 };
 </script>
-
+  
 <style lang="stylus" scoped>
-.content
-  height calc(100vh - 8rem)
-  padding-top 2.133333rem
-</style>
+  .content
+    height calc(100vh - 8rem)
+    padding-top 2.133333rem
+  </style>

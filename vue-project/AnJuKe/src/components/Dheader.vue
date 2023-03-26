@@ -30,7 +30,7 @@ onMounted(async () => {
 <style lang="stylus" scoped>
   @import '../common/style/mixin.styl';
   .detail-content
-        height calc(100vh - 1.33333rem)
+        // height calc(100vh - 1.33333rem)
         overflow hidden
         overflow-y auto
         .detail-swipe-wrap

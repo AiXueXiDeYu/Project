@@ -1,0 +1,16 @@
+{
+  "name": "yu",
+  "version": "1.0.0",
+  "description": "一个简单的博客",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev ./docs",
+    "build": "vuepress build ./docs",
+    "deploy": "sh build/deploy.sh"
+  },
+  "author": "yu",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.9.9"
+  }
+}

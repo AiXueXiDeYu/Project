@@ -3,6 +3,9 @@
 		<div class="product-info">
 			<div class="name">
 				{{ item.huoseName }}
+				<router-link class="vr" to="/vr">
+					VR看房
+				</router-link>
 				<div class="status">
 					<div class="p">
 						{{ item.p1 }}
@@ -71,6 +74,11 @@ console.log(detailList);
 	display: flex; 
 	justify-content: flex-start;
 	margin: 10px 0;
+}
+.vr {
+	margin-left: 30%;
+	font-size: 22px;
+	font-weight: 700;
 }
 .houseprice {
 	display: flex; 

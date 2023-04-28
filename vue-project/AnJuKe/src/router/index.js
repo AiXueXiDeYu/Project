@@ -61,7 +61,14 @@ const router = createRouter({
          },
          component: () => import('@/views/Search.vue')
       },
-
+      {
+         path: '/VR',
+         name: 'vr',
+         meta:{
+             index: 3
+         },
+         component: () => import('@/views/VR.vue')
+      }
    ]
 
 })

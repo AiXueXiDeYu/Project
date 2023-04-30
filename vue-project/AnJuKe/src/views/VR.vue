@@ -58,7 +58,7 @@ onMounted(() => {
     scene.environment = new THREE.Color('#fff')
     render()
 
-    renderer.setSize(threeDBox.value.offsetWidth, threeDBox.value.offsetHeight * 5)
+    renderer.setSize(threeDBox.value.offsetWidth * 5, threeDBox.value.offsetHeight * 5)
 
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.minDistance = 1
